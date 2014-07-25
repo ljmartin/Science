@@ -1,0 +1,14 @@
+#!/bin/csh
+#PBS -N haddock
+#PBS -o haddock.out
+#PBS -e haddock.err
+#PBS
+
+source /etc/profile.d/modules.sh
+module load intel openmpi-intel
+cd "$PBS_O_WORKDIR"
+setenv HADDOCK /tmp6m/lmar3213/haddock2.1
+source $HADDOCK/haddock_configure.csh
+set cns=$CNS_INST/bin/cns
+cat $PBS_NODEFILE > nodes.txt
+haddock2.1 >& haddock.log
